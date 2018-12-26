@@ -38,24 +38,28 @@ function text_abount_LAW_show(){
     $replyData = new VideoMessageBuilder($videoUrl,$picThumbnail);
     return $replyData;
 }
+
 function text_abount_BBA_show(){
     $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/bba/240';
     $videoUrl = WEBSERVICE_URL."/src/video/Management.mp4"; 
     $replyData = new VideoMessageBuilder($videoUrl,$picThumbnail);
     return $replyData;
 }
+
 function text_abount_POL_show(){
     $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/pol/240';
     $videoUrl = WEBSERVICE_URL."/src/video/Political.mp4"; 
     $replyData = new VideoMessageBuilder($videoUrl,$picThumbnail);
     return $replyData;
 }
+
 function text_abount_NURSE_show(){
     $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/nurse/240';
     $videoUrl = WEBSERVICE_URL."/src/video/Nurse.mp4"; 
     $replyData = new VideoMessageBuilder($videoUrl,$picThumbnail);
     return $replyData;
 }
+
 function text_abount_PH_show(){
     $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/ph/240';
     $videoUrl = WEBSERVICE_URL."/src/video/MixPublic.mp4"; 
@@ -184,6 +188,117 @@ function text_faculty_show(){
     );
     return $replyData; 
 }
+
+function text_contact(){
+    $textReplyMessage = "เลือกวิทยาเขต\r\nศรีสะเกษ พิมพ์ SSK\r\nสุรินทร์ พิมพ์ SRN\r\nบุรีรัมย์ พิมพ์ BRM\r\nนครศรีธรรมราช พิมพ์ NST\r\nเพชรบูรณ์ พิมพ์ PNB\r\nระยอง พิมพ์ RYG";
+    $replyData = new TextMessageBuilder($textReplyMessage);
+    return $replyData;
+}
+
+function text_contact_SSK(){
+    $textReplyMessage = "วิทยาเขตศรีสะเกษ\r\nโทรศัพท์ 045-617-971";
+    $textMessage = new TextMessageBuilder($textReplyMessage);
+
+    $placeName = "ที่ตั้ง";
+    $placeAddress = "99 หมู่ 6 ต.โพธิ์ อ.เมือง จ.ศรีสะเกษ 33000";
+    $latitude = 15.1063854;
+    $longitude = 104.3905991;
+    $locationMessage = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);        
+ 
+    $multiMessage = new MultiMessageBuilder;
+    $multiMessage->add($textMessage);
+    $multiMessage->add($locationMessage);
+
+    $replyData = $multiMessage;
+    return $replyData;
+}
+function text_contact_SRN(){
+    $textReplyMessage = "วิทยาเขตสุรินทร์\r\nโทรศัพท์ 044-143-143";
+    $textMessage = new TextMessageBuilder($textReplyMessage);
+
+    $placeName = "ที่ตั้ง";
+    $placeAddress = "333 หมู่ 7 ถ.สุรินทร์-ปราสาท ต.เฉนียง อ.เมือง จ.สุรินทร์ 32000";
+    $latitude = 14.8044052;
+    $longitude = 103.4509349;
+    $locationMessage = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);        
+ 
+    $multiMessage = new MultiMessageBuilder;
+    $multiMessage->add($textMessage);
+    $multiMessage->add($locationMessage);
+    
+    $replyData = $multiMessage;
+    return $replyData;
+}
+function text_contact_BRM(){
+    $textReplyMessage = "วิทยาเขตบุรีรัมย์\r\nโทรศัพท์ 044-666-583";
+    $textMessage = new TextMessageBuilder($textReplyMessage);
+
+    $placeName = "ที่ตั้ง";
+    $placeAddress = "333 หมู่ 8 ต.ชุมเห็ด อ.เมือง จ.บุรีรัมย์ 31000";
+    $latitude = 15.0256117;
+    $longitude = 103.094873;
+    $locationMessage = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);        
+ 
+    $multiMessage = new MultiMessageBuilder;
+    $multiMessage->add($textMessage);
+    $multiMessage->add($locationMessage);
+    
+    $replyData = $multiMessage;
+    return $replyData;
+}
+function text_contact_NST(){
+    $textReplyMessage = "วิทยาเขตนครศรีธรรมราช\r\nโทรศัพท์ 075-446-458";
+    $textMessage = new TextMessageBuilder($textReplyMessage);
+
+    $placeName = "ที่ตั้ง";
+    $placeAddress = "333 หมู่ 13 ต.ช้างซ้าย อ.พระพรหม จ.นครศรีธรรมราช 80000";
+    $latitude = 8.3667308;
+    $longitude = 99.9713934;
+    $locationMessage = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);        
+ 
+    $multiMessage = new MultiMessageBuilder;
+    $multiMessage->add($textMessage);
+    $multiMessage->add($locationMessage);
+    
+    $replyData = $multiMessage;
+    return $replyData;
+}
+function text_contact_PNB(){
+    $textReplyMessage = "วิทยาเขตเพรชบูรณ์\r\nโทรศัพท์ 056-911-655";
+    $textMessage = new TextMessageBuilder($textReplyMessage);
+
+    $placeName = "ที่ตั้ง";
+    $placeAddress = "333 หมู่ 8 ต.บ้านโตก อ.เมือง จ.เพรชบูรณ์ 67000";
+    $latitude = 16.3444715;
+    $longitude = 101.0903101;
+    $locationMessage = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);        
+ 
+    $multiMessage = new MultiMessageBuilder;
+    $multiMessage->add($textMessage);
+    $multiMessage->add($locationMessage);
+    
+    $replyData = $multiMessage;
+    return $replyData;
+}
+function text_contact_RYG(){
+    $textReplyMessage = "วิทยาเขตระยอง\r\nโทรศัพท์ 038-672-898";
+    $textMessage = new TextMessageBuilder($textReplyMessage);
+
+    $placeName = "ที่ตั้ง";
+    $placeAddress = "333/3 หมู่ 3 ถ.สุขุมวิท ต.วังหว้า อ.แกลง จ.ระยอง 21110";
+    $latitude = 12.7662674;
+    $longitude = 101.6288038;
+    $locationMessage = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);        
+ 
+    $multiMessage = new MultiMessageBuilder;
+    $multiMessage->add($textMessage);
+    $multiMessage->add($locationMessage);
+    
+    $replyData = $multiMessage;
+    
+    return $replyData;
+}
+
 
 
 ?>

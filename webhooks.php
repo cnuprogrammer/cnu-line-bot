@@ -144,39 +144,99 @@ if(!is_null($eventMessage)){
     $idMessage = $eventObj->getMessageId();  
 }
  
-// แปลงข้อความรูปแบบ JSON ให้อยู่ในโครงสร้างตัวแปร array
-$events = json_decode($content, true);
 if(!is_null($events)){
-    // ถ้ามีค่า สร้างตัวแปรเก็บ replyToken ไว้ใช้งาน
-    $replyToken = $events['events'][0]['replyToken'];
-    $typeMessage = $events['events'][0]['message']['type'];
-    $userMessage = $events['events'][0]['message']['text'];
-
-    switch ($typeMessage){
-        case 'text':{
-            switch ($userMessage) {
-                case "คณะ":{
-                    $replyData = text_faculty_show();
-                }break;
-                case "เกี่ยวกับคณะนิติศาสตร์":{
-                    $replyData = text_abount_LAW_show();
-                }break;
-                case "เกี่ยวกับคณะบริหารศาสตร์":{
-                    $replyData = text_abount_BBA_show();
-                }break;
-                case "เกี่ยวกับคณะรัฐศาสตร์":{
-                    $replyData = text_abount_POL_show();
-                }break;
-                case "เกี่ยวกับคณะพยาบาลศาสตร์":{
-                    $replyData = text_abount_NURSE_show();
-                }break;
-                case "เกี่ยวกับคณะสาธารณสุขศาสตร์":{
-                    $replyData = text_abount_PH_show();
-                }break;
-                default:break;
-            }
-        }break;
-        default:break;
+    // ถ้าเป็น Postback Event
+    if(!is_null($eventPostback)){
+        $dataPostback = NULL;
+        $paramPostback = NULL;
+        // แปลงข้อมูลจาก Postback Data เป็น array
+        parse_str($eventObj->getPostbackData(),$dataPostback);
+        // ดึงค่า params กรณีมีค่า params
+        $paramPostback = $eventObj->getPostbackParams();
+        // ทดสอบแสดงข้อความที่เกิดจาก Postaback Event
+        $textReplyMessage = "ข้อความจาก Postback Event Data = ";        
+        $textReplyMessage.= json_encode($dataPostback);
+        $textReplyMessage.= json_encode($paramPostback);
+        $replyData = new TextMessageBuilder($textReplyMessage);     
+    }
+    // ถ้าเป้น Message Event 
+    if(!is_null($eventMessage)){
+        switch ($typeMessage){ // กำหนดเงื่อนไขการทำงานจาก ประเภทของ message
+            case 'text':  // ถ้าเป็นข้อความ
+                $userMessage = strtolower($userMessage); // แปลงเป็นตัวเล็ก สำหรับทดสอบ
+                switch ($userMessage) {
+                    case "คณะ":{
+                        $replyData = text_faculty_show();
+                    }break;
+                    case "เกี่ยวกับคณะนิติศาสตร์":{
+                        $replyData = text_abount_LAW_show();
+                    }break;
+                    case "เกี่ยวกับคณะบริหารศาสตร์":{
+                        $replyData = text_abount_BBA_show();
+                    }break;
+                    case "เกี่ยวกับคณะรัฐศาสตร์":{
+                        $replyData = text_abount_POL_show();
+                    }break;
+                    case "เกี่ยวกับคณะพยาบาลศาสตร์":{
+                        $replyData = text_abount_NURSE_show();
+                    }break;
+                    case "เกี่ยวกับคณะพยาบาลศาสตร์":{
+                        $replyData = text_abount_NURSE_show();
+                    }break;
+                    case "ติดต่อเรา":{
+                        $replyData = text_contact();
+                    }break;
+                    case "ssk":{
+                        $replyData = text_contact_SSK();
+                    }break;
+                    case "srn":{
+                        $replyData = text_contact_SRN();
+                    }break;  
+                    case "brm":{
+                        $replyData = text_contact_BRM();
+                    }break;  
+                    case "nst":{
+                        $replyData = text_contact_NST();
+                    }break;                                                                                                        
+                    case "pnb":{
+                        $replyData = text_contact_PNB();
+                    }break;  
+                    case "ryg":{
+                        $replyData = text_contact_RYG();
+                    }break;
+                    default:{
+                        $textReplyMessage = " คุณไม่ได้พิมพ์ ค่า ตามที่กำหนด";
+                        $replyData = new TextMessageBuilder($textReplyMessage);
+                    }break;                                      
+                }
+                break;
+            case 'sticker':{
+                if(!is_null($groupId) || !is_null($roomId)){
+                    if($eventObj->isGroupEvent()){
+                        $response = $bot->getGroupMemberProfile($groupId, $userId);
+                    }
+                    if($eventObj->isRoomEvent()){
+                        $response = $bot->getRoomMemberProfile($roomId, $userId);    
+                    }
+                }else{
+                    $response = $bot->getProfile($userId);
+                }
+                if ($response->isSucceeded()) {
+                    $userData = $response->getJSONDecodedBody(); // return array     
+                    // $userData['userId']
+                    // $userData['displayName']
+                    // $userData['pictureUrl']
+                    // $userData['statusMessage']
+                    $textReplyMessage = 'สวัสดีครับ คุณ '.$userData['displayName'];     
+                }else{
+                    //$textReplyMessage = 'สวัสดีครับ คุณคือใคร';
+                }
+                $replyData = new TextMessageBuilder($textReplyMessage);   
+            }                                         
+            default:{
+                // กรณีเงื่อนไขอื่นๆ ผู้ใช้ไม่ได้ส่งเป็นข้อความ และ สติ๊กเกอร์
+            }break;  
+        }
     }
 }
  
