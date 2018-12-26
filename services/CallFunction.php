@@ -32,27 +32,47 @@ require_once("DBConnection.php");
 require_once("ApiSettings.php");
 
 
-function text_A(){
-    $textReplyMessage = "คุณพิมพ์ A";
-    return $replyData = new TextMessageBuilder($textReplyMessage);
+function text_abount_LAW_show(){
+    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/law/240';
+    $videoUrl = WEBSERVICE_URL."/src/video/Laws.mp4"; 
+    $replyData = new VideoMessageBuilder($videoUrl,$picThumbnail);
+    return $replyData;
 }
-
-function text_abount_faculty_show(){
-    $picThumbnail = WEBSERVICE_URL.'cnu-line-bot/imgsrc/photos/f/nurse/240';
-    $videoUrl = WEBSERVICE_URL."cnu-line-bot/src/video/Nurse.mp4"; 
+function text_abount_BBA_show(){
+    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/bba/240';
+    $videoUrl = WEBSERVICE_URL."/src/video/Management.mp4"; 
+    $replyData = new VideoMessageBuilder($videoUrl,$picThumbnail);
+    return $replyData;
+}
+function text_abount_POL_show(){
+    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/pol/240';
+    $videoUrl = WEBSERVICE_URL."/src/video/Political.mp4"; 
+    $replyData = new VideoMessageBuilder($videoUrl,$picThumbnail);
+    return $replyData;
+}
+function text_abount_NURSE_show(){
+    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/nurse/240';
+    $videoUrl = WEBSERVICE_URL."/src/video/Nurse.mp4"; 
+    $replyData = new VideoMessageBuilder($videoUrl,$picThumbnail);
+    return $replyData;
+}
+function text_abount_PH_show(){
+    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/ph/240';
+    $videoUrl = WEBSERVICE_URL."/src/video/MixPublic.mp4"; 
     $replyData = new VideoMessageBuilder($videoUrl,$picThumbnail);
     return $replyData;
 }
 
 function text_faculty_show(){
-    $actionBuilder = array(
+
+    $ab_LAW = array(
         new MessageTemplateActionBuilder(
             'เกี่ยวกับคณะ',// ข้อความแสดงในปุ่ม
-            'เกี่ยวกับคณะ' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+            'เกี่ยวกับคณะนิติศาสตร์' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
         ),
         new MessageTemplateActionBuilder(
             'จบแล้วทำงานอะไร',// ข้อความแสดงในปุ่ม
-            'จบแล้วทำงานอะไร' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+            'นิติศาสตร์จบแล้วทำงานอะไร' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
         ),
         new UriTemplateActionBuilder(
             'สมัครเรียน', // ข้อความแสดงในปุ่ม
@@ -60,38 +80,103 @@ function text_faculty_show(){
         ),
         
     );
+
+    $ab_BBA = array(
+        new MessageTemplateActionBuilder(
+            'เกี่ยวกับคณะ',// ข้อความแสดงในปุ่ม
+            'เกี่ยวกับคณะบริหารศาสตร์' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+        ),
+        new MessageTemplateActionBuilder(
+            'จบแล้วทำงานอะไร',// ข้อความแสดงในปุ่ม
+            'บริหารศาสตร์จบแล้วทำงานอะไร' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+        ),
+        new UriTemplateActionBuilder(
+            'สมัครเรียน', // ข้อความแสดงในปุ่ม
+            'http://cc.cnu.ac.th:8085/Pages/Recruit/Form/RecruitPage1Form.aspx'
+        ),
+        
+    );
+
+    $ab_POL = array(
+        new MessageTemplateActionBuilder(
+            'เกี่ยวกับคณะ',// ข้อความแสดงในปุ่ม
+            'เกี่ยวกับคณะรัฐศาสตร์' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+        ),
+        new MessageTemplateActionBuilder(
+            'จบแล้วทำงานอะไร',// ข้อความแสดงในปุ่ม
+            'รัฐศาสตร์จบแล้วทำงานอะไร' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+        ),
+        new UriTemplateActionBuilder(
+            'สมัครเรียน', // ข้อความแสดงในปุ่ม
+            'http://cc.cnu.ac.th:8085/Pages/Recruit/Form/RecruitPage1Form.aspx'
+        ),
+        
+    );
+    
+    $ab_NURSE = array(
+        new MessageTemplateActionBuilder(
+            'เกี่ยวกับคณะ',// ข้อความแสดงในปุ่ม
+            'เกี่ยวกับคณะพยาบาลศาสตร์' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+        ),
+        new MessageTemplateActionBuilder(
+            'จบแล้วทำงานอะไร',// ข้อความแสดงในปุ่ม
+            'พยาบาลศาสตร์จบแล้วทำงานอะไร' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+        ),
+        new UriTemplateActionBuilder(
+            'สมัครเรียน', // ข้อความแสดงในปุ่ม
+            'http://cc.cnu.ac.th:8085/Pages/Recruit/Form/RecruitPage1Form.aspx'
+        ),
+        
+    );
+
+    $ab_PH = array(
+        new MessageTemplateActionBuilder(
+            'เกี่ยวกับคณะ',// ข้อความแสดงในปุ่ม
+            'เกี่ยวกับคณะสาธารณสุขศาสตร์' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+        ),
+        new MessageTemplateActionBuilder(
+            'จบแล้วทำงานอะไร',// ข้อความแสดงในปุ่ม
+            'สาธารณสุขศาสตร์ จบแล้วทำงานอะไร' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+        ),
+        new UriTemplateActionBuilder(
+            'สมัครเรียน', // ข้อความแสดงในปุ่ม
+            'http://cc.cnu.ac.th:8085/Pages/Recruit/Form/RecruitPage1Form.aspx'
+        ),
+        
+    );
+
     $replyData = new TemplateMessageBuilder('Carousel',
         new CarouselTemplateBuilder(
             array(
                 new CarouselColumnTemplateBuilder(
                     'นิติศาสตร์',
                     'Description Carousel',
-                    WEBSERVICE_URL.'cnu-line-bot/imgsrc/photos/f/law/700',
-                    $actionBuilder
+                    WEBSERVICE_URL.'/imgsrc/photos/f/law/700',
+                    $ab_LAW
                 ),
                 new CarouselColumnTemplateBuilder(
                     'บริหารศาสตร์',
                     'Description Carousel',
-                    WEBSERVICE_URL.'cnu-line-bot/imgsrc/photos/f/bba/700',
-                    $actionBuilder
+                    WEBSERVICE_URL.'/imgsrc/photos/f/bba/700',
+                    $ab_BBA
                 ),
                 new CarouselColumnTemplateBuilder(
                     'รัฐศาสตร์',
                     'Description Carousel',
-                    WEBSERVICE_URL.'cnu-line-bot/imgsrc/photos/f/pol/700',
-                    $actionBuilder
+                    WEBSERVICE_URL.'/imgsrc/photos/f/pol/700',
+                    $ab_POL
                 ),     
                 new CarouselColumnTemplateBuilder(
                     'พยาบาลศาสตร์',
                     'Description Carousel',
-                    WEBSERVICE_URL.'cnu-line-bot/imgsrc/photos/f/nurse/700',
-                    $actionBuilder
+                    WEBSERVICE_URL.'/imgsrc/photos/f/nurse/700',
+                    $ab_NURSE
                 ),
                 new CarouselColumnTemplateBuilder(
                     'สาธารณสุขศาสตร์',
                     'Description Carousel',
-                    WEBSERVICE_URL.'cnu-line-bot/imgsrc/photos/f/ph/700',
-                    $actionBuilder
+                    WEBSERVICE_URL.'/imgsrc/photos/f/ph/700',
+                    $ab_PH
                 ),
                                     
             )

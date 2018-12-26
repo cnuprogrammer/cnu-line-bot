@@ -1,5 +1,5 @@
 <?php
-/// การตั้งค่าเกี่ยวกับ bot ใน LINE Messaging API
-define('WEBSERVICE_URL','https://083eb0e1.ngrok.io/');
+/// การตั้งค่า URL ของ Web hook service
+define('WEBSERVICE_URL','https://d54a79b8.ngrok.io/cnu-line-bot');
 
 ?>

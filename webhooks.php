@@ -158,15 +158,20 @@ if(!is_null($events)){
                 case "คณะ":{
                     $replyData = text_faculty_show();
                 }break;
-                case "เกี่ยวกับคณะ":{
-                    $replyData = text_abount_faculty_show();
+                case "เกี่ยวกับคณะนิติศาสตร์":{
+                    $replyData = text_abount_LAW_show();
                 }break;
-                case "AAA":{
-                    $replyData = text_A();
+                case "เกี่ยวกับคณะบริหารศาสตร์":{
+                    $replyData = text_abount_BBA_show();
                 }break;
-                case "B":{
-                    $textReplyMessage = "คุณพิมพ์ B";
-                    $replyData = new TextMessageBuilder($textReplyMessage);
+                case "เกี่ยวกับคณะรัฐศาสตร์":{
+                    $replyData = text_abount_POL_show();
+                }break;
+                case "เกี่ยวกับคณะพยาบาลศาสตร์":{
+                    $replyData = text_abount_NURSE_show();
+                }break;
+                case "เกี่ยวกับคณะสาธารณสุขศาสตร์":{
+                    $replyData = text_abount_PH_show();
                 }break;
                 default:break;
             }
