@@ -29,6 +29,8 @@ use LINE\LINEBot\MessageBuilder\TemplateBuilder\ImageCarouselColumnTemplateBuild
 
 require_once("DBConnection.php");
 
+require_once("ApiSettings.php");
+
 
 function text_A(){
     $textReplyMessage = "คุณพิมพ์ A";
@@ -36,8 +38,8 @@ function text_A(){
 }
 
 function text_abount_faculty_show(){
-    $picThumbnail = 'https://015d2df7.ngrok.io/cnu-line-bot/imgsrc/photos/f/nurse/240';
-    $videoUrl = "https://015d2df7.ngrok.io/cnu-line-bot/src/video/Nurse.mp4"; 
+    $picThumbnail = WEBSERVICE_URL.'cnu-line-bot/imgsrc/photos/f/nurse/240';
+    $videoUrl = WEBSERVICE_URL."cnu-line-bot/src/video/Nurse.mp4"; 
     $replyData = new VideoMessageBuilder($videoUrl,$picThumbnail);
     return $replyData;
 }
@@ -64,31 +66,31 @@ function text_faculty_show(){
                 new CarouselColumnTemplateBuilder(
                     'นิติศาสตร์',
                     'Description Carousel',
-                    'https://015d2df7.ngrok.io/cnu-line-bot/imgsrc/photos/f/law/700',
+                    WEBSERVICE_URL.'cnu-line-bot/imgsrc/photos/f/law/700',
                     $actionBuilder
                 ),
                 new CarouselColumnTemplateBuilder(
                     'บริหารศาสตร์',
                     'Description Carousel',
-                    'https://015d2df7.ngrok.io/cnu-line-bot/imgsrc/photos/f/bba/700',
+                    WEBSERVICE_URL.'cnu-line-bot/imgsrc/photos/f/bba/700',
                     $actionBuilder
                 ),
                 new CarouselColumnTemplateBuilder(
                     'รัฐศาสตร์',
                     'Description Carousel',
-                    'https://015d2df7.ngrok.io/cnu-line-bot/imgsrc/photos/f/pol/700',
+                    WEBSERVICE_URL.'cnu-line-bot/imgsrc/photos/f/pol/700',
                     $actionBuilder
                 ),     
                 new CarouselColumnTemplateBuilder(
                     'พยาบาลศาสตร์',
                     'Description Carousel',
-                    'https://015d2df7.ngrok.io/cnu-line-bot/imgsrc/photos/f/nurse/700',
+                    WEBSERVICE_URL.'cnu-line-bot/imgsrc/photos/f/nurse/700',
                     $actionBuilder
                 ),
                 new CarouselColumnTemplateBuilder(
                     'สาธารณสุขศาสตร์',
                     'Description Carousel',
-                    'https://015d2df7.ngrok.io/cnu-line-bot/imgsrc/photos/f/ph/700',
+                    WEBSERVICE_URL.'cnu-line-bot/imgsrc/photos/f/ph/700',
                     $actionBuilder
                 ),
                                     
