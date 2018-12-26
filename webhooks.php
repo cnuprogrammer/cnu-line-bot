@@ -161,7 +161,7 @@ if(!is_null($events)){
                 case "เกี่ยวกับคณะ":{
                     $replyData = text_abount_faculty_show();
                 }break;
-                case "AA":{
+                case "AAA":{
                     $replyData = text_A();
                 }break;
                 case "B":{
