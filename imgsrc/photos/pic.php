@@ -14,10 +14,15 @@ use Intervention\Image\ImageManager;
  
 if(isset($_GET['file']) && $_GET['file']!=""){
     $picFile = trim($_GET['file']);
-    $originalFilePath = '../../src/image/'; // แก้ไขเป็นโฟลเดอร์รูปต้นฉบับ
+    $originalFilePath = '../../src/image/'; // แก้ไขเป็นโฟลเดอร์รูปต้นฉบับ 
+
+    //$originalFilePath = 'https://cc.cnu.ac.th/WebMode/MasterData/EmployeePicture/';
+    
     $fullFilePath = $originalFilePath.$picFile;
     $fullFilePathJPG = $fullFilePath.'.jpg';
     $fullFilePathPNG = $fullFilePath.'.png';
+    // echo($fullFilePathJPG);
+    // echo($fullFilePathPNG);
     $fullFile = '';
     $picType = '';
     if(file_exists($fullFilePathJPG)){
@@ -27,11 +32,12 @@ if(isset($_GET['file']) && $_GET['file']!=""){
     if(file_exists($fullFilePathPNG)){
         $picType = 'png';
         $fullFile = $fullFilePath.'.'.$picType;
-    }   
+    }
     if($picType==''){
         header("HTTP/1.0 404 Not Found");
         exit;
     }
+    //echo($fullFilePathPNG);
     // สร้างตัวแปรอ้างอิง object ตัวจัดการรูปภาพ
     $manager = new ImageManager();    
     $img = $manager->make($fullFile);     
@@ -108,4 +114,5 @@ if(isset($_GET['file']) && $_GET['file']!=""){
     header("HTTP/1.0 404 Not Found");
     exit;   
 }
+
 ?>

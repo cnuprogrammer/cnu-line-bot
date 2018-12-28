@@ -186,6 +186,9 @@ if(!is_null($events)){
                     case "ติดต่อเรา":{
                         $replyData = text_contact();
                     }break;
+                    case "ค่าเล่าเรียน":{
+                        $replyData = text_tuition_fee();
+                    }break;
                     case "ssk":{
                         $replyData = text_contact_SSK();
                     }break;
@@ -205,8 +208,8 @@ if(!is_null($events)){
                         $replyData = text_contact_RYG();
                     }break;
                     default:{
-                        $textReplyMessage = " คุณไม่ได้พิมพ์ ค่า ตามที่กำหนด";
-                        $replyData = new TextMessageBuilder($textReplyMessage);
+                        // $textReplyMessage = " คุณไม่ได้พิมพ์ ค่า ตามที่กำหนด";
+                        // $replyData = new TextMessageBuilder($textReplyMessage);
                     }break;                                      
                 }
                 break;

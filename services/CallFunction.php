@@ -27,6 +27,11 @@ use LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateBuilder\ImageCarouselTemplateBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateBuilder\ImageCarouselColumnTemplateBuilder;
 
+use LINE\LINEBot\RichMenuBuilder;
+use LINE\LINEBot\RichMenuBuilder\RichMenuAreaBoundsBuilder;
+use LINE\LINEBot\RichMenuBuilder\RichMenuAreaBuilder;
+use LINE\LINEBot\RichMenuBuilder\RichMenuSizeBuilder;
+
 require_once("DBConnection.php");
 
 require_once("ApiSettings.php");
@@ -75,8 +80,9 @@ function text_faculty_show(){
             'เกี่ยวกับคณะนิติศาสตร์' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
         ),
         new MessageTemplateActionBuilder(
-            'จบแล้วทำงานอะไร',// ข้อความแสดงในปุ่ม
-            'นิติศาสตร์จบแล้วทำงานอะไร' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+            'ค่าเล่าเรียน',// ข้อความแสดงในปุ่ม
+            //'นิติศาสตร์จบค่าเล่าเรียน' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+            'ค่าเล่าเรียน'
         ),
         new UriTemplateActionBuilder(
             'สมัครเรียน', // ข้อความแสดงในปุ่ม
@@ -91,8 +97,9 @@ function text_faculty_show(){
             'เกี่ยวกับคณะบริหารศาสตร์' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
         ),
         new MessageTemplateActionBuilder(
-            'จบแล้วทำงานอะไร',// ข้อความแสดงในปุ่ม
-            'บริหารศาสตร์จบแล้วทำงานอะไร' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+            'ค่าเล่าเรียน',// ข้อความแสดงในปุ่ม
+            //'บริหารศาสตร์ค่าเล่าเรียน' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+            'ค่าเล่าเรียน'
         ),
         new UriTemplateActionBuilder(
             'สมัครเรียน', // ข้อความแสดงในปุ่ม
@@ -107,8 +114,9 @@ function text_faculty_show(){
             'เกี่ยวกับคณะรัฐศาสตร์' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
         ),
         new MessageTemplateActionBuilder(
-            'จบแล้วทำงานอะไร',// ข้อความแสดงในปุ่ม
-            'รัฐศาสตร์จบแล้วทำงานอะไร' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+            'ค่าเล่าเรียน',// ข้อความแสดงในปุ่ม
+            //'รัฐศาสตร์ค่าเล่าเรียน' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+            'ค่าเล่าเรียน'
         ),
         new UriTemplateActionBuilder(
             'สมัครเรียน', // ข้อความแสดงในปุ่ม
@@ -123,8 +131,9 @@ function text_faculty_show(){
             'เกี่ยวกับคณะพยาบาลศาสตร์' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
         ),
         new MessageTemplateActionBuilder(
-            'จบแล้วทำงานอะไร',// ข้อความแสดงในปุ่ม
-            'พยาบาลศาสตร์จบแล้วทำงานอะไร' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+            'ค่าเล่าเรียน',// ข้อความแสดงในปุ่ม
+            //'พยาบาลศาสตร์ค่าเล่าเรียน' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+            'ค่าเล่าเรียน'
         ),
         new UriTemplateActionBuilder(
             'สมัครเรียน', // ข้อความแสดงในปุ่ม
@@ -139,8 +148,9 @@ function text_faculty_show(){
             'เกี่ยวกับคณะสาธารณสุขศาสตร์' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
         ),
         new MessageTemplateActionBuilder(
-            'จบแล้วทำงานอะไร',// ข้อความแสดงในปุ่ม
-            'สาธารณสุขศาสตร์ จบแล้วทำงานอะไร' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+            'ค่าเล่าเรียน',// ข้อความแสดงในปุ่ม
+            //'สาธารณสุขศาสตร์ค่าเล่าเรียน' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+            'ค่าเล่าเรียน'
         ),
         new UriTemplateActionBuilder(
             'สมัครเรียน', // ข้อความแสดงในปุ่ม
@@ -187,6 +197,13 @@ function text_faculty_show(){
         )
     );
     return $replyData; 
+}
+
+function text_tuition_fee(){
+    $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/f/Tuition-fee/';
+    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/Tuition-fee/240';
+    $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
+    return $replyData;
 }
 
 function text_contact(){
