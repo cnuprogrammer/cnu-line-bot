@@ -316,6 +316,44 @@ function text_contact_RYG(){
     return $replyData;
 }
 
+function text_recruit_show(){
+    $actions = array (
+        New \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("มี", "Coming Soon !"),
+        New \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder("ไม่มี", "http://cc.cnu.ac.th:8085/Pages/Recruit/Form/RecruitPage1Form.aspx?ReferID=0000000000")
+      );
+      $button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder("มีผู้แนะนำหรือไม่", $actions);
+      $replyData = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("confim message", $button);
+      return $replyData;
+}
+
+function text_student_show(){
+    $actionBuilder = array(
+
+        new UriTemplateActionBuilder(
+            'สิทธิ์การเข้าสอบ', // ข้อความแสดงในปุ่ม
+            'http://cc.cnu.ac.th:8085/Pages/Student/CheckExamPermission/CEPSearch.aspx'
+        ),
+        new UriTemplateActionBuilder(
+            'cc.cnu.ac.th', // ข้อความแสดงในปุ่ม
+            'http://cc.cnu.ac.th'
+        ),
+  
+    );
+    $imageUrl = '';
+    $replyData = new TemplateMessageBuilder('Button Template',
+        new ButtonTemplateBuilder(
+                'เลือกเมนู', // กำหนดหัวเรื่อง
+                'Please select', // กำหนดรายละเอียด
+                $imageUrl, // กำหนด url รุปภาพ
+                $actionBuilder  // กำหนด action object
+        )
+    ); 
+
+
+    return $replyData;
+}
+
+
 
 
 ?>

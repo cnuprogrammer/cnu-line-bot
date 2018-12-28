@@ -165,8 +165,14 @@ if(!is_null($events)){
             case 'text':  // ถ้าเป็นข้อความ
                 $userMessage = strtolower($userMessage); // แปลงเป็นตัวเล็ก สำหรับทดสอบ
                 switch ($userMessage) {
+                    case "สมัคร":{
+                        $replyData = text_recruit_show();
+                    }break;
                     case "คณะ":{
                         $replyData = text_faculty_show();
+                    }break;
+                    case "นักศึกษา":{
+                        $replyData = text_student_show();
                     }break;
                     case "เกี่ยวกับคณะนิติศาสตร์":{
                         $replyData = text_abount_LAW_show();
@@ -207,6 +213,7 @@ if(!is_null($events)){
                     case "ryg":{
                         $replyData = text_contact_RYG();
                     }break;
+
                     default:{
                         // $textReplyMessage = " คุณไม่ได้พิมพ์ ค่า ตามที่กำหนด";
                         // $replyData = new TextMessageBuilder($textReplyMessage);
