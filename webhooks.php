@@ -174,6 +174,9 @@ if(!is_null($events)){
                     case "นักศึกษา":{
                         $replyData = text_student_show();
                     }break;
+                    case "อาจารย์":{
+                        $replyData = text_teacher_show();
+                    }break;
                     case "เกี่ยวกับคณะนิติศาสตร์":{
                         $replyData = text_abount_LAW_show();
                     }break;
@@ -215,6 +218,9 @@ if(!is_null($events)){
                     }break;
 
                     default:{
+                        if(strstr($userMessage, "qr")){
+                            $replyData = text_request_qr($userMessage);
+                        }
                         // $textReplyMessage = " คุณไม่ได้พิมพ์ ค่า ตามที่กำหนด";
                         // $replyData = new TextMessageBuilder($textReplyMessage);
                     }break;                                      

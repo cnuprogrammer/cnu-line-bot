@@ -334,16 +334,16 @@ function text_student_show(){
             'http://cc.cnu.ac.th:8085/Pages/Student/CheckExamPermission/CEPSearch.aspx'
         ),
         new UriTemplateActionBuilder(
-            'cc.cnu.ac.th', // ข้อความแสดงในปุ่ม
+            'เข้าระบบ EMS', // ข้อความแสดงในปุ่ม
             'http://cc.cnu.ac.th'
         ),
   
     );
     $imageUrl = '';
-    $replyData = new TemplateMessageBuilder('Button Template',
+    $replyData = new TemplateMessageBuilder('นักศึกษา',
         new ButtonTemplateBuilder(
-                'เลือกเมนู', // กำหนดหัวเรื่อง
-                'Please select', // กำหนดรายละเอียด
+                'นักศึกษา', // กำหนดหัวเรื่อง
+                'เลือกเมนู', // กำหนดรายละเอียด
                 $imageUrl, // กำหนด url รุปภาพ
                 $actionBuilder  // กำหนด action object
         )
@@ -353,6 +353,47 @@ function text_student_show(){
     return $replyData;
 }
 
+function text_teacher_show(){
+    $actionBuilder = array(
+
+        new UriTemplateActionBuilder(
+            'สร้าง QRCode รับสมัคร', // ข้อความแสดงในปุ่ม
+            'http://cc.cnu.ac.th:8085/Pages/Student/CheckExamPermission/CEPSearch.aspx'
+        ),
+        new UriTemplateActionBuilder(
+            'เข้าระบบ EMS', // ข้อความแสดงในปุ่ม
+            'http://cc.cnu.ac.th'
+        ),
+  
+    );
+    $imageUrl = '';
+    $replyData = new TemplateMessageBuilder('อาจารย์',
+        new ButtonTemplateBuilder(
+                'อาจารย์', // กำหนดหัวเรื่อง
+                'เลือกเมนู', // กำหนดรายละเอียด
+                $imageUrl, // กำหนด url รุปภาพ
+                $actionBuilder  // กำหนด action object
+        )
+    ); 
+
+
+    return $replyData;
+}
+
+function text_request_qr($userMessage){
+
+    $EmployeeID = substr($userMessage,2, strlen($userMessage));
+
+    if(file_put_contents("src/image/".$EmployeeID.".png", fopen("http://cc.cnu.ac.th:8085/Content/Images/EmployeeQRcode/".$EmployeeID.".png", 'r'))){
+        $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'/';
+        $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'/300';
+        $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
+    }else{
+        $textReplyMessage = "ไม่พบข้อมูล ID : ".$EmployeeID;
+        $replyData = new TextMessageBuilder($textReplyMessage);
+    }
+    return $replyData;
+}
 
 
 
