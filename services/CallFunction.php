@@ -358,7 +358,7 @@ function text_teacher_show(){
 
         new UriTemplateActionBuilder(
             'สร้าง QRCode รับสมัคร', // ข้อความแสดงในปุ่ม
-            'http://cc.cnu.ac.th:8085/Pages/Student/CheckExamPermission/CEPSearch.aspx'
+            'http://cc.cnu.ac.th:8085/Pages/LineBot/GenEmployeeQRCodeForm.aspx'
         ),
         new UriTemplateActionBuilder(
             'เข้าระบบ EMS', // ข้อความแสดงในปุ่ม

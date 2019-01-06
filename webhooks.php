@@ -12,6 +12,7 @@ require_once 'bot_settings.php';
 
 
 require_once '/services/CallFunction.php';
+require_once '/services/RichmenuCallFuction.php';
  
 // กรณีมีการเชื่อมต่อกับฐานข้อมูล
 //require_once("dbconnect.php");
