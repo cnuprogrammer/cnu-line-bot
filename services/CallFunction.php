@@ -460,6 +460,80 @@ function text_show_qr(){
     return $replyData;
 }
 
+function text_show_pqr(){
+    $textReplyMessage = "เลือกพื้นหลังสำหรับ QR Code";
+    $textMessage = new TextMessageBuilder($textReplyMessage);
+
+
+    $TemplateMessage = new TemplateMessageBuilder('Image Carousel',
+        new ImageCarouselTemplateBuilder(
+            array(
+                new ImageCarouselColumnTemplateBuilder(
+                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG1/700',
+                    new MessageTemplateActionBuilder(
+                        'เลือกรูปนี้',// ข้อความแสดงในปุ่ม
+                        'สร้างคิวอาร์โค้ดรูป1' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+                    )
+                ),
+                new ImageCarouselColumnTemplateBuilder(
+                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG2/700',
+                    new MessageTemplateActionBuilder(
+                        'เลือกรูปนี้',// ข้อความแสดงในปุ่ม
+                        'สร้างคิวอาร์โค้ดรูป2' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+                    )
+                ),
+                new ImageCarouselColumnTemplateBuilder(
+                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG3/700',
+                    new MessageTemplateActionBuilder(
+                        'เลือกรูปนี้',// ข้อความแสดงในปุ่ม
+                        'สร้างคิวอาร์โค้ดรูป3' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+                    )
+                ),
+                new ImageCarouselColumnTemplateBuilder(
+                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG4/700',
+                    new MessageTemplateActionBuilder(
+                        'เลือกรูปนี้',// ข้อความแสดงในปุ่ม
+                        'สร้างคิวอาร์โค้ดรูป4' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+                    )
+                ),
+                new ImageCarouselColumnTemplateBuilder(
+                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG5/700',
+                    new MessageTemplateActionBuilder(
+                        'เลือกรูปนี้',// ข้อความแสดงในปุ่ม
+                        'สร้างคิวอาร์โค้ดรูป5' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+                    )
+                ),      
+                new ImageCarouselColumnTemplateBuilder(
+                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG6/700',
+                    new MessageTemplateActionBuilder(
+                        'เลือกรูปนี้',// ข้อความแสดงในปุ่ม
+                        'สร้างคิวอาร์โค้ดรูป6' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+                    )
+                 ),
+                new ImageCarouselColumnTemplateBuilder(
+                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG7/700',
+                    new MessageTemplateActionBuilder(
+                        'เลือกรูปนี้',// ข้อความแสดงในปุ่ม
+                        'สร้างคิวอาร์โค้ดรูป7' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+                    )
+                ),                                
+            )
+        )
+    );
+
+    $replyData = new MultiMessageBuilder;
+    $replyData->add($textMessage);
+    $replyData->add($TemplateMessage);
+    return $replyData; 
+}
+function text_request_pqr_by($userMessage){
+    $PicID = substr($userMessage, strlen($userMessage)-1);
+    $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/f/qrav'.$PicID.'/';
+    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/qrav'.$PicID.'/240';
+    $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
+    return $replyData;
+}
+
 
 
 ?>

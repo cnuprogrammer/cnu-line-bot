@@ -220,8 +220,14 @@ if(!is_null($events)){
                     case "แสดงคิวอาร์โค้ด":{
                         $replyData = text_show_qr();
                     }break;
-
+                    case "สร้างคิวอาร์โค้ด":{
+                        $replyData = text_show_pqr();
+                    }break;
                     default:{
+                        if(strstr($userMessage, "สร้างคิวอาร์โค้ดรูป")){
+                            $replyData = text_request_pqr_by($userMessage);
+                        }
+
                         if(strstr($userMessage, "pqr")){
                             $replyData = text_request_pqr($userMessage);
                         }else{
