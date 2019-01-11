@@ -355,16 +355,19 @@ function text_student_show(){
 
 function text_teacher_show(){
     $actionBuilder = array(
-
         new UriTemplateActionBuilder(
             'สร้าง QRCode รับสมัคร', // ข้อความแสดงในปุ่ม
             'http://cc.cnu.ac.th:8085/Pages/LineBot/GenEmployeeQRCodeForm.aspx'
+        ),
+        new MessageTemplateActionBuilder(
+            'แสดง QRCode',// ข้อความแสดงในปุ่ม
+            'แสดงคิวอาร์โค้ด' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
         ),
         new UriTemplateActionBuilder(
             'เข้าระบบ EMS', // ข้อความแสดงในปุ่ม
             'http://cc.cnu.ac.th'
         ),
-  
+
     );
     $imageUrl = '';
     $replyData = new TemplateMessageBuilder('อาจารย์',
@@ -389,9 +392,71 @@ function text_request_qr($userMessage){
         $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'/300';
         $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
     }else{
-        $textReplyMessage = "ไม่พบข้อมูล ID : ".$EmployeeID;
+        $textReplyMessage = "กรุณาไปที่เมนูสร้าง QRCode";
         $replyData = new TextMessageBuilder($textReplyMessage);
     }
+    return $replyData;
+}
+
+function text_request_pqr($userMessage){
+
+
+    $EmployeeID = substr($userMessage,3, strlen($userMessage)-5);
+    $PicID = substr($userMessage, strlen($userMessage)-1);
+
+    // Sets our destination URL
+    $endpoint_url = 'http://cc.cnu.ac.th:8085/Pages/LineBot/EmployeeQRCodeForm.aspx';
+
+    // Creates our data array that we want to post to the endpoint
+    $data_to_post = [
+        'ReferID' => $EmployeeID,
+        'PicID' => $PicID,
+    ];
+    
+    // Sets our options array so we can assign them all at once
+    $options = [
+        CURLOPT_URL        => $endpoint_url,
+        CURLOPT_POST       => true,
+        CURLOPT_POSTFIELDS => $data_to_post,
+    ];
+    
+    // Initiates the cURL object
+    $curl = curl_init();
+    
+    // Assigns our options
+    curl_setopt_array($curl, $options);
+    
+    // Executes the cURL POST
+    $results = curl_exec($curl);
+    
+    // Be kind, tidy up!
+    curl_close($curl);
+    
+    
+    //echo($results);
+
+    if($results == "1"){
+        if(file_put_contents("src/image/".$EmployeeID.".png", fopen("http://cc.cnu.ac.th:8085/Content/Images/EmployeeQRcode/".$EmployeeID.".png", 'r'))){
+            $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'/';
+            $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'/300';
+            $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
+        }else{
+            $textReplyMessage = "ไม่พบข้อมูล QRCode";
+            $replyData = new TextMessageBuilder($textReplyMessage);
+        }
+    }else{
+        $textReplyMessage = "404";
+        $replyData = new TextMessageBuilder($textReplyMessage);
+    }
+
+    
+    return $replyData;
+}
+
+function text_show_qr(){
+    $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/f/linebot-qr/';
+    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/linebot-qr/240';
+    $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
     return $replyData;
 }
 

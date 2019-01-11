@@ -217,11 +217,19 @@ if(!is_null($events)){
                     case "ryg":{
                         $replyData = text_contact_RYG();
                     }break;
+                    case "แสดงคิวอาร์โค้ด":{
+                        $replyData = text_show_qr();
+                    }break;
 
                     default:{
-                        if(strstr($userMessage, "qr")){
-                            $replyData = text_request_qr($userMessage);
+                        if(strstr($userMessage, "pqr")){
+                            $replyData = text_request_pqr($userMessage);
+                        }else{
+                            if(strstr($userMessage, "qr")){
+                                $replyData = text_request_qr($userMessage);
+                            }
                         }
+                        
                         // $textReplyMessage = " คุณไม่ได้พิมพ์ ค่า ตามที่กำหนด";
                         // $replyData = new TextMessageBuilder($textReplyMessage);
                     }break;                                      
