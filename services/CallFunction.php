@@ -434,11 +434,11 @@ function text_request_pqr($userMessage){
     
     
     //echo($results);
-
+    $filename = "src/image/".$EmployeeID.".png";
     if($results == "1"){
-        if(file_put_contents("src/image/".$EmployeeID.".png", fopen("http://cc.cnu.ac.th:8085/Content/Images/EmployeeQRcode/".$EmployeeID.".png", 'r'))){
-            $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'/';
-            $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'/300';
+        if(file_put_contents("src/image/".$EmployeeID."_".$PicID.".png", fopen("http://cc.cnu.ac.th:8085/Content/Images/EmployeeQRcode/".$EmployeeID.".png", 'r'))){
+            $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'_'.$PicID.'/';
+            $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'_'.$PicID.'/300';
             $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
         }else{
             $textReplyMessage = "ไม่พบข้อมูล QRCode";
@@ -448,8 +448,6 @@ function text_request_pqr($userMessage){
         $textReplyMessage = "404";
         $replyData = new TextMessageBuilder($textReplyMessage);
     }
-
-    
     return $replyData;
 }
 
