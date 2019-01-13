@@ -40,6 +40,8 @@
 // echo '-------------';
 // echo($PicID);
 // echo(strlen($userMessage));
+
+
 // $EmployeeID = "4610800002";
 // $filename = "src/image/".$EmployeeID.".png";
 // if (file_exists($filename)) {

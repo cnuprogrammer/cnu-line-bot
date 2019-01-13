@@ -363,6 +363,10 @@ function text_teacher_show(){
             'แสดง QRCode',// ข้อความแสดงในปุ่ม
             'แสดงคิวอาร์โค้ด' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
         ),
+        new MessageTemplateActionBuilder(
+            'สร้างภาพโฆษณา',// ข้อความแสดงในปุ่ม
+            'สร้างคิวอาร์โค้ด' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+        ),
         new UriTemplateActionBuilder(
             'เข้าระบบ EMS', // ข้อความแสดงในปุ่ม
             'http://cc.cnu.ac.th'
@@ -387,20 +391,52 @@ function text_request_qr($userMessage){
 
     $EmployeeID = substr($userMessage,2, strlen($userMessage));
 
-    if(file_put_contents("src/image/".$EmployeeID.".png", fopen("http://cc.cnu.ac.th:8085/Content/Images/EmployeeQRcode/".$EmployeeID.".png", 'r'))){
-        $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'/';
-        $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'/300';
-        $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
+    // Sets our destination URL
+    $endpoint_url = 'http://cc.cnu.ac.th:8085/Pages/LineBot/EmployeeQRCodeForm.aspx';
+
+    // Creates our data array that we want to post to the endpoint
+    $data_to_post = [
+        'ReferID' => $EmployeeID,
+    ];
+    
+    // Sets our options array so we can assign them all at once
+    $options = [
+        CURLOPT_URL        => $endpoint_url,
+        CURLOPT_POST       => true,
+        CURLOPT_POSTFIELDS => $data_to_post,
+    ];
+    
+    // Initiates the cURL object
+    $curl = curl_init();
+    
+    // Assigns our options
+    curl_setopt_array($curl, $options);
+    
+    // Executes the cURL POST
+    $results = curl_exec($curl);
+    
+    // Be kind, tidy up!
+    curl_close($curl);
+    if($results == "1"){
+        if(file_put_contents("src/image/".$EmployeeID.".png", fopen("http://cc.cnu.ac.th:8085/Content/Images/EmployeeQRcode/".$EmployeeID.".png", 'r'))){
+            $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'/';
+            $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'/300';
+            $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
+        }else{
+            $textReplyMessage = "ไม่พบข้อมูล QRCode";
+            $replyData = new TextMessageBuilder($textReplyMessage);
+        }
     }else{
-        $textReplyMessage = "กรุณาไปที่เมนูสร้าง QRCode";
+        $textReplyMessage = "404";
         $replyData = new TextMessageBuilder($textReplyMessage);
     }
+
+
+    
     return $replyData;
 }
 
 function text_request_pqr($userMessage){
-
-
     $EmployeeID = substr($userMessage,3, strlen($userMessage)-5);
     $PicID = substr($userMessage, strlen($userMessage)-1);
 
@@ -435,8 +471,10 @@ function text_request_pqr($userMessage){
     
     //echo($results);
     $filename = "src/image/".$EmployeeID.".png";
+
+
     if($results == "1"){
-        if(file_put_contents("src/image/".$EmployeeID."_".$PicID.".png", fopen("http://cc.cnu.ac.th:8085/Content/Images/EmployeeQRcode/".$EmployeeID.".png", 'r'))){
+        if(file_put_contents("src/image/".$EmployeeID."_".$PicID.".png", fopen("http://cc.cnu.ac.th:8085/Content/Images/EmployeePromoteQRcode/".$EmployeeID.".png", 'r'))){
             $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'_'.$PicID.'/';
             $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'_'.$PicID.'/300';
             $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
@@ -467,49 +505,49 @@ function text_show_pqr(){
         new ImageCarouselTemplateBuilder(
             array(
                 new ImageCarouselColumnTemplateBuilder(
-                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG1/700',
+                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG1/480',
                     new MessageTemplateActionBuilder(
                         'เลือกรูปนี้',// ข้อความแสดงในปุ่ม
                         'สร้างคิวอาร์โค้ดรูป1' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
                     )
                 ),
                 new ImageCarouselColumnTemplateBuilder(
-                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG2/700',
+                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG2/480',
                     new MessageTemplateActionBuilder(
                         'เลือกรูปนี้',// ข้อความแสดงในปุ่ม
                         'สร้างคิวอาร์โค้ดรูป2' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
                     )
                 ),
                 new ImageCarouselColumnTemplateBuilder(
-                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG3/700',
+                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG3/480',
                     new MessageTemplateActionBuilder(
                         'เลือกรูปนี้',// ข้อความแสดงในปุ่ม
                         'สร้างคิวอาร์โค้ดรูป3' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
                     )
                 ),
                 new ImageCarouselColumnTemplateBuilder(
-                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG4/700',
+                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG4/480',
                     new MessageTemplateActionBuilder(
                         'เลือกรูปนี้',// ข้อความแสดงในปุ่ม
                         'สร้างคิวอาร์โค้ดรูป4' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
                     )
                 ),
                 new ImageCarouselColumnTemplateBuilder(
-                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG5/700',
+                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG5/480',
                     new MessageTemplateActionBuilder(
                         'เลือกรูปนี้',// ข้อความแสดงในปุ่ม
                         'สร้างคิวอาร์โค้ดรูป5' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
                     )
                 ),      
                 new ImageCarouselColumnTemplateBuilder(
-                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG6/700',
+                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG6/480',
                     new MessageTemplateActionBuilder(
                         'เลือกรูปนี้',// ข้อความแสดงในปุ่ม
                         'สร้างคิวอาร์โค้ดรูป6' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
                     )
                  ),
                 new ImageCarouselColumnTemplateBuilder(
-                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG7/700',
+                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG7/480',
                     new MessageTemplateActionBuilder(
                         'เลือกรูปนี้',// ข้อความแสดงในปุ่ม
                         'สร้างคิวอาร์โค้ดรูป7' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
