@@ -87,25 +87,25 @@ $eventUnfollow = NULL;
 $eventBeacon = NULL;
 // เงื่อนไขการกำหนดประเภท Event 
 switch($eventType){
-    case 'message': $eventMessage = true; break;    
-    case 'postback': $eventPostback = true; break;  
-    case 'join': $eventJoin = true; break;  
-    case 'leave': $eventLeave = true; break;    
-    case 'follow': $eventFollow = true; break;  
-    case 'unfollow': $eventUnfollow = true; break;  
-    case 'beacon': $eventBeacon = true; break;                          
+    case 'message': $eventMessage = true; break;
+    case 'postback': $eventPostback = true; break;
+    case 'join': $eventJoin = true; break;
+    case 'leave': $eventLeave = true; break;
+    case 'follow': $eventFollow = true; break;
+    case 'unfollow': $eventUnfollow = true; break;
+    case 'beacon': $eventBeacon = true; break;
 }
 // สร้างตัวแปรเก็บค่า groupId กรณีเป็น Event ที่เกิดขึ้นใน GROUP
 if($eventObj->isGroupEvent()){
-    $groupId = $eventObj->getGroupId();  
+    $groupId = $eventObj->getGroupId();
 }
 // สร้างตัวแปรเก็บค่า roomId กรณีเป็น Event ที่เกิดขึ้นใน ROOM
 if($eventObj->isRoomEvent()){
-    $roomId = $eventObj->getRoomId();            
+    $roomId = $eventObj->getRoomId();
 }
 // ดึงค่า replyToken มาไว้ใช้งาน ทุกๆ Event ที่ไม่ใช่ Leave และ Unfollow Event
 if(is_null($eventLeave) && is_null($eventUnfollow)){
-    $replyToken = $eventObj->getReplyToken();    
+    $replyToken = $eventObj->getReplyToken();
 }
 // ดึงค่า userId มาไว้ใช้งาน ทุกๆ Event ที่ไม่ใช่ Leave Event
 if(is_null($eventLeave)){
@@ -164,7 +164,7 @@ if(!is_null($events)){
     if(!is_null($eventMessage)){
         switch ($typeMessage){ // กำหนดเงื่อนไขการทำงานจาก ประเภทของ message
             case 'text':  // ถ้าเป็นข้อความ
-                $userMessage = strtolower($userMessage); // แปลงเป็นตัวเล็ก สำหรับทดสอบ
+                $userMessage = mb_strtolower($userMessage,'UTF-8'); // แปลงเป็นตัวเล็ก สำหรับทดสอบ
                 switch ($userMessage) {
                     case "สมัคร":{
                         $replyData = text_recruit_show();
@@ -190,8 +190,8 @@ if(!is_null($events)){
                     case "เกี่ยวกับคณะพยาบาลศาสตร์":{
                         $replyData = text_abount_NURSE_show();
                     }break;
-                    case "เกี่ยวกับคณะพยาบาลศาสตร์":{
-                        $replyData = text_abount_NURSE_show();
+                    case "เกี่ยวกับคณะสาธารณสุขศาสตร์":{
+                        $replyData = text_abount_PH_show();
                     }break;
                     case "ติดต่อเรา":{
                         $replyData = text_contact();
@@ -227,7 +227,6 @@ if(!is_null($events)){
                         if(strstr($userMessage, "สร้างคิวอาร์โค้ดรูป")){
                             $replyData = text_request_pqr_by($userMessage);
                         }
-
                         if(strstr($userMessage, "pqr")){
                             $replyData = text_request_pqr($userMessage);
                         }else{
@@ -235,8 +234,8 @@ if(!is_null($events)){
                                 $replyData = text_request_qr($userMessage);
                             }
                         }
-                        
-                        // $textReplyMessage = " คุณไม่ได้พิมพ์ ค่า ตามที่กำหนด";
+                        // เปิดเพื่อตรวจสอบ ข้อความที่รับเข้ามา
+                        // $textReplyMessage = $userMessage;
                         // $replyData = new TextMessageBuilder($textReplyMessage);
                     }break;                                      
                 }

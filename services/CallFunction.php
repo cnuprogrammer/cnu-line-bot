@@ -38,35 +38,40 @@ require_once("ApiSettings.php");
 
 
 function text_abount_LAW_show(){
-    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/law/240';
+    //$picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/law/240';
+    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=law&width=240';
     $videoUrl = WEBSERVICE_URL."/src/video/Laws.mp4"; 
     $replyData = new VideoMessageBuilder($videoUrl,$picThumbnail);
     return $replyData;
 }
 
 function text_abount_BBA_show(){
-    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/bba/240';
+    //$picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/bba/240';
+    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=bba&width=240';
     $videoUrl = WEBSERVICE_URL."/src/video/Management.mp4"; 
     $replyData = new VideoMessageBuilder($videoUrl,$picThumbnail);
     return $replyData;
 }
 
 function text_abount_POL_show(){
-    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/pol/240';
+    //$picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/pol/240';
+    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=pol&width=240';
     $videoUrl = WEBSERVICE_URL."/src/video/Political.mp4"; 
     $replyData = new VideoMessageBuilder($videoUrl,$picThumbnail);
     return $replyData;
 }
 
 function text_abount_NURSE_show(){
-    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/nurse/240';
+    //$picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/nurse/240';
+    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=nurse&width=240';
     $videoUrl = WEBSERVICE_URL."/src/video/Nurse.mp4"; 
     $replyData = new VideoMessageBuilder($videoUrl,$picThumbnail);
     return $replyData;
 }
 
 function text_abount_PH_show(){
-    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/ph/240';
+    //$picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/ph/240';
+    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=ph&width=240';
     $videoUrl = WEBSERVICE_URL."/src/video/MixPublic.mp4"; 
     $replyData = new VideoMessageBuilder($videoUrl,$picThumbnail);
     return $replyData;
@@ -159,40 +164,44 @@ function text_faculty_show(){
         
     );
 
-    $replyData = new TemplateMessageBuilder('Carousel',
+    $replyData = new TemplateMessageBuilder('คณะ',
         new CarouselTemplateBuilder(
             array(
                 new CarouselColumnTemplateBuilder(
                     'นิติศาสตร์',
                     'Description Carousel',
-                    WEBSERVICE_URL.'/imgsrc/photos/f/law/700',
+                    WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=law&width=700',
+                    //WEBSERVICE_URL.'/imgsrc/photos/f/law/700',
                     $ab_LAW
                 ),
                 new CarouselColumnTemplateBuilder(
                     'บริหารศาสตร์',
                     'Description Carousel',
-                    WEBSERVICE_URL.'/imgsrc/photos/f/bba/700',
+                    WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=bba&width=700',
+                    //WEBSERVICE_URL.'/imgsrc/photos/f/bba/700',
                     $ab_BBA
                 ),
                 new CarouselColumnTemplateBuilder(
                     'รัฐศาสตร์',
                     'Description Carousel',
-                    WEBSERVICE_URL.'/imgsrc/photos/f/pol/700',
+                    WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=pol&width=700',
+                    //WEBSERVICE_URL.'/imgsrc/photos/f/pol/700',
                     $ab_POL
                 ),     
                 new CarouselColumnTemplateBuilder(
                     'พยาบาลศาสตร์',
                     'Description Carousel',
-                    WEBSERVICE_URL.'/imgsrc/photos/f/nurse/700',
+                    WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=nurse&width=700',
+                    //WEBSERVICE_URL.'/imgsrc/photos/f/nurse/700',
                     $ab_NURSE
                 ),
                 new CarouselColumnTemplateBuilder(
                     'สาธารณสุขศาสตร์',
                     'Description Carousel',
-                    WEBSERVICE_URL.'/imgsrc/photos/f/ph/700',
+                    WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=ph&width=700',
+                    //WEBSERVICE_URL.'/imgsrc/photos/f/ph/700',
                     $ab_PH
                 ),
-                                    
             )
         )
     );
@@ -200,8 +209,10 @@ function text_faculty_show(){
 }
 
 function text_tuition_fee(){
-    $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/f/Tuition-fee/';
-    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/Tuition-fee/240';
+    // $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/f/Tuition-fee/';
+    // $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/Tuition-fee/240';
+    $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=Tuition-fee';
+    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=Tuition-fee&width=700';
     $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
     return $replyData;
 }
@@ -328,7 +339,6 @@ function text_recruit_show(){
 
 function text_student_show(){
     $actionBuilder = array(
-
         new UriTemplateActionBuilder(
             'สิทธิ์การเข้าสอบ', // ข้อความแสดงในปุ่ม
             'http://cc.cnu.ac.th:8085/Pages/Student/CheckExamPermission/CEPSearch.aspx'
@@ -348,8 +358,6 @@ function text_student_show(){
                 $actionBuilder  // กำหนด action object
         )
     ); 
-
-
     return $replyData;
 }
 
@@ -369,9 +377,8 @@ function text_teacher_show(){
         ),
         new UriTemplateActionBuilder(
             'เข้าระบบ EMS', // ข้อความแสดงในปุ่ม
-            'http://cc.cnu.ac.th'
+            'https://cc.cnu.ac.th'
         ),
-
     );
     $imageUrl = '';
     $replyData = new TemplateMessageBuilder('อาจารย์',
@@ -382,8 +389,6 @@ function text_teacher_show(){
                 $actionBuilder  // กำหนด action object
         )
     ); 
-
-
     return $replyData;
 }
 
@@ -419,8 +424,10 @@ function text_request_qr($userMessage){
     curl_close($curl);
     if($results == "1"){
         if(file_put_contents("src/image/".$EmployeeID.".png", fopen("http://cc.cnu.ac.th:8085/Content/Images/EmployeeQRcode/".$EmployeeID.".png", 'r'))){
-            $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'/';
-            $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'/300';
+            // $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'/';
+            // $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'/300';
+            $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file='.$EmployeeID;
+            $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file='.$EmployeeID.'&width=300';
             $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
         }else{
             $textReplyMessage = "ไม่พบข้อมูล QRCode";
@@ -475,8 +482,10 @@ function text_request_pqr($userMessage){
 
     if($results == "1"){
         if(file_put_contents("src/image/".$EmployeeID."_".$PicID.".png", fopen("http://cc.cnu.ac.th:8085/Content/Images/EmployeePromoteQRcode/".$EmployeeID.".png", 'r'))){
-            $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'_'.$PicID.'/';
-            $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'_'.$PicID.'/300';
+            // $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'_'.$PicID.'/';
+            // $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/'.$EmployeeID.'_'.$PicID.'/300';
+            $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file='.$EmployeeID.'_'.$PicID;
+            $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file='.$EmployeeID.'_'.$PicID.'&width=300';
             $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
         }else{
             $textReplyMessage = "ไม่พบข้อมูล QRCode";
@@ -490,8 +499,10 @@ function text_request_pqr($userMessage){
 }
 
 function text_show_qr(){
-    $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/f/linebot-qr/';
-    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/linebot-qr/240';
+    // $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/f/linebot-qr/';
+    // $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/linebot-qr/240';
+    $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=linebot-qr';
+    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=linebot-qr&width=300';
     $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
     return $replyData;
 }
@@ -501,53 +512,60 @@ function text_show_pqr(){
     $textMessage = new TextMessageBuilder($textReplyMessage);
 
 
-    $TemplateMessage = new TemplateMessageBuilder('Image Carousel',
+    $TemplateMessage = new TemplateMessageBuilder('เลือกพื้นหลังสำหรับ QR Code',
         new ImageCarouselTemplateBuilder(
             array(
                 new ImageCarouselColumnTemplateBuilder(
-                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG1/480',
+                    //WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG1/480',
+                    WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=QR_BG1&width=480',
                     new MessageTemplateActionBuilder(
                         'เลือกรูปนี้',// ข้อความแสดงในปุ่ม
                         'สร้างคิวอาร์โค้ดรูป1' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
                     )
                 ),
                 new ImageCarouselColumnTemplateBuilder(
-                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG2/480',
+                    //WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG2/480',
+                    WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=QR_BG2&width=480',
                     new MessageTemplateActionBuilder(
                         'เลือกรูปนี้',// ข้อความแสดงในปุ่ม
                         'สร้างคิวอาร์โค้ดรูป2' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
                     )
                 ),
                 new ImageCarouselColumnTemplateBuilder(
-                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG3/480',
+                    //WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG3/480',
+                    WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=QR_BG3&width=480',
                     new MessageTemplateActionBuilder(
                         'เลือกรูปนี้',// ข้อความแสดงในปุ่ม
                         'สร้างคิวอาร์โค้ดรูป3' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
                     )
                 ),
                 new ImageCarouselColumnTemplateBuilder(
-                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG4/480',
+                    //WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG4/480',
+                    WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=QR_BG4&width=480',
                     new MessageTemplateActionBuilder(
                         'เลือกรูปนี้',// ข้อความแสดงในปุ่ม
                         'สร้างคิวอาร์โค้ดรูป4' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
                     )
                 ),
                 new ImageCarouselColumnTemplateBuilder(
-                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG5/480',
+                    //WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG5/480',
+                    WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=QR_BG5&width=480',
                     new MessageTemplateActionBuilder(
                         'เลือกรูปนี้',// ข้อความแสดงในปุ่ม
                         'สร้างคิวอาร์โค้ดรูป5' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
                     )
                 ),      
                 new ImageCarouselColumnTemplateBuilder(
-                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG6/480',
+                    //WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG6/480',
+                    WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=QR_BG6&width=480',
                     new MessageTemplateActionBuilder(
                         'เลือกรูปนี้',// ข้อความแสดงในปุ่ม
                         'สร้างคิวอาร์โค้ดรูป6' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
                     )
                  ),
                 new ImageCarouselColumnTemplateBuilder(
-                    WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG7/480',
+                    //WEBSERVICE_URL.'/imgsrc/photos/f/QR_BG7/480',
+                    WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=QR_BG7&width=480',
                     new MessageTemplateActionBuilder(
                         'เลือกรูปนี้',// ข้อความแสดงในปุ่ม
                         'สร้างคิวอาร์โค้ดรูป7' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
@@ -564,12 +582,12 @@ function text_show_pqr(){
 }
 function text_request_pqr_by($userMessage){
     $PicID = substr($userMessage, strlen($userMessage)-1);
-    $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/f/qrav'.$PicID.'/';
-    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/qrav'.$PicID.'/240';
+    // $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/f/qrav'.$PicID.'/';
+    // $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/f/qrav'.$PicID.'/240';
+    $picFullSize = WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=qrav'.$PicID;
+    $picThumbnail = WEBSERVICE_URL.'/imgsrc/photos/pic.php?mode=f&file=qrav'.$PicID.'&width=240';
     $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
     return $replyData;
 }
-
-
 
 ?>
