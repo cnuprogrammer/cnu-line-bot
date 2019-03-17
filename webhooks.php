@@ -50,40 +50,33 @@ $roomId = null;
 // สร้างตัวแปร replyToken สำหรับกรณีใช้ตอบกลับข้อความ
 $replyToken = null;
 // สร้างตัวแปร ไว้เก็บค่าว่าเป้น Event ประเภทไหน
-$eventMessage = null;
-$eventPostback = null;
-$eventJoin = null;
-$eventLeave = null;
-$eventFollow = null;
-$eventUnfollow = null;
-$eventBeacon = null;
-// เงื่อนไขการกำหนดประเภท Event
-switch ($eventType) {
-    case 'message':$eventMessage = true;
-        break;
-    case 'postback':$eventPostback = true;
-        break;
-    case 'join':$eventJoin = true;
-        break;
-    case 'leave':$eventLeave = true;
-        break;
-    case 'follow':$eventFollow = true;
-        break;
-    case 'unfollow':$eventUnfollow = true;
-        break;
-    case 'beacon':$eventBeacon = true;
-        break;
+$eventMessage = NULL;
+$eventPostback = NULL;
+$eventJoin = NULL;
+$eventLeave = NULL;
+$eventFollow = NULL;
+$eventUnfollow = NULL;
+$eventBeacon = NULL;
+// เงื่อนไขการกำหนดประเภท Event 
+switch($eventType){
+    case 'message': $eventMessage = true; break;
+    case 'postback': $eventPostback = true; break;
+    case 'join': $eventJoin = true; break;
+    case 'leave': $eventLeave = true; break;
+    case 'follow': $eventFollow = true; break;
+    case 'unfollow': $eventUnfollow = true; break;
+    case 'beacon': $eventBeacon = true; break;
 }
 // สร้างตัวแปรเก็บค่า groupId กรณีเป็น Event ที่เกิดขึ้นใน GROUP
-if ($eventObj->isGroupEvent()) {
+if($eventObj->isGroupEvent()){
     $groupId = $eventObj->getGroupId();
 }
 // สร้างตัวแปรเก็บค่า roomId กรณีเป็น Event ที่เกิดขึ้นใน ROOM
-if ($eventObj->isRoomEvent()) {
+if($eventObj->isRoomEvent()){
     $roomId = $eventObj->getRoomId();
 }
 // ดึงค่า replyToken มาไว้ใช้งาน ทุกๆ Event ที่ไม่ใช่ Leave และ Unfollow Event
-if (is_null($eventLeave) && is_null($eventUnfollow)) {
+if(is_null($eventLeave) && is_null($eventUnfollow)){
     $replyToken = $eventObj->getReplyToken();
 }
 // ดึงค่า userId มาไว้ใช้งาน ทุกๆ Event ที่ไม่ใช่ Leave Event
@@ -139,11 +132,11 @@ if (!is_null($events)) {
         $textReplyMessage .= json_encode($paramPostback);
         $replyData = new TextMessageBuilder($textReplyMessage);
     }
-    // ถ้าเป้น Message Event
-    if (!is_null($eventMessage)) {
-        switch ($typeMessage) { // กำหนดเงื่อนไขการทำงานจาก ประเภทของ message
-            case 'text': // ถ้าเป็นข้อความ
-                $userMessage = mb_strtolower($userMessage, 'UTF-8'); // แปลงเป็นตัวเล็ก สำหรับทดสอบ
+    // ถ้าเป้น Message Event 
+    if(!is_null($eventMessage)){
+        switch ($typeMessage){ // กำหนดเงื่อนไขการทำงานจาก ประเภทของ message
+            case 'text':  // ถ้าเป็นข้อความ
+                $userMessage = mb_strtolower($userMessage,'UTF-8'); // แปลงเป็นตัวเล็ก สำหรับทดสอบ
                 switch ($userMessage) {
                     case "สมัคร":{
                             $replyData = text_recruit_show();
